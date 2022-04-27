@@ -1,0 +1,83 @@
+swagger: "2.0"
+info:
+  description: "DanSe wedding invitation service for RSVP handling"
+  version: "1.0.0"
+  title: "DanSe wedding invitation"
+host: "danse-wedding.io"
+basePath: "/invitation/api/v1"
+tags:
+  - name: "helloWorld"
+    description: "Test the app health"
+  - name: "rsvp"
+    description: "Send a response with the invitees information"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /helloWorld:
+    get:
+      tags:
+        - "helloWorld"
+      summary: "Test app health check"
+      description: ""
+      operationId: "helloWorld"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          schema:
+            type: "string"
+          description: "Successful response"
+        "500":
+          description: "Server error"
+
+  /rsvp:
+    post:
+      tags:
+        - "rsvp"
+      summary: "Send a response with the invitees information"
+      description: "Send the invitee and companions name and if there is any kid"
+      operationId: "rsvp"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "rsvp"
+          in: "body"
+          description: "Status values that need to be considered for filter"
+          required: true
+          schema:
+            $ref: "#/definitions/Rsvp"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Error in the request"
+definitions:
+  Rsvp:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        example: "112358"
+      invitees:
+        type: "array"
+        items:
+          $ref: "#/definitions/Invitee"
+  Invitee:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        maxLength: 50
+        example: "Juanito Banana"
+      menu:
+        type: "string"
+        enum:
+          - adult
+          - kid
+      allergies:
+        type: "string"
+        maxLength: 150
+        example: "Ninguna"
