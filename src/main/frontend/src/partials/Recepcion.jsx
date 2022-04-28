@@ -39,10 +39,10 @@ function Recepcion(props) {
               <div className="h-16 w-16 flex text-center bg-danse-pink-100 rounded-full shadow flex-shrink-0 ml-3">
                 <img className="w-1/2 h-1/2 m-auto" src={MapPin} alt="Pin" />
               </div>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+              <h4 className="text-xl text-danse-green-500 font-bold leading-snug tracking-tight mb-1">
                 Radisson del Rey Toluca
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-danse-green-500 text-center">
                 Carr Toluca - México km 63.5, Delegación Sta Ana Tlapaltitlán,
                 50160 Toluca de Lerdo, Méx.
               </p>

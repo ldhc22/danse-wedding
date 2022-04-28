@@ -43,7 +43,7 @@ function Rsvp(props) {
           <h1 className="h2 text-danse-green-500 py-4">Confirmación de asistencia</h1>
           <p className="text-xl text-danse-green-500" >
             Por favor, déjanos saber si nos acompañarás al evento y quiénes
-            vendrán contigo
+            vendrán contigo antes del 23 de mayo
           </p>
         </div>
         <form className="w-full md:w-3/4" onSubmit={handleSubmit(onSubmit)}>
@@ -117,7 +117,7 @@ function Rsvp(props) {
               </div>
             );
           })}
-          <div className="text-danse-green-500 w-full px-3 mb-4">
+          <div className="text-danse-green-500 w-full px-3 md:px-0 mb-4">
             <button
               className="w-full bg-slate-200 rounded shadow shadow appearance-none border py-2 px-3 text-danse-green-500 "
               onClick={(event) => {

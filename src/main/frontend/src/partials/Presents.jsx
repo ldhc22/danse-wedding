@@ -52,7 +52,7 @@ function Presents(props) {
             >
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
-                <a
+                <div
                   className={`flex flex-col items-center text-lg p-6 rounded border transition duration-300 ease-in-out mb-3 ${
                     tab !== 1
                       ? "bg-white shadow-md border-danse-baige-100 hover:shadow-lg"
@@ -77,7 +77,7 @@ function Presents(props) {
                     <a className="flex justify-center items-center text-danse-pink-500 text-2xl hover:underline" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493" target="_blank" rel="noopener noreferrer">Da click aquí</a>
                   </div>
 
-                </a>
+                </div>
                 </div>
                 <div>
               </div>
