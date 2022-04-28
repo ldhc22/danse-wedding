@@ -219,9 +219,11 @@
                     <filesets> 
                         <fileset> 
                             <directory>src/main/frontend/dist</directory> 
+							<includes>**/*</includes>
                         </fileset> 
 						<fileset>
 							<directory>${basedir}/src/main/resources/static</directory>
+							<includes>**/*</includes>
 						</fileset>
                     </filesets> 
                 </configuration> 
