@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Heart from "../images/gift-heart.svg";
 
 const handleScroll = (ref) => {
@@ -13,6 +13,7 @@ const handleScroll = (ref) => {
 function Header(props) {
   const [top, setTop] = useState(true);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { search } = useLocation();
 
   // detect whether user has scrolled the page down by 10px
   useEffect(() => {
@@ -24,14 +25,21 @@ function Header(props) {
   }, [top]);
 
   return (
-    <header className={`fixed w-full z-30 bg-opacity-70 transition duration-300 ease-in-out ${!top && 'bg-danse-green-100 backdrop-blur-sm shadow-lg'}`}>
+    <header
+      className={`fixed w-full z-30 bg-opacity-70 transition duration-300 ease-in-out ${
+        !top && "bg-danse-green-100 backdrop-blur-sm shadow-lg"
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Site branding */}
           <div className="flex-shrink-0 mr-4">
             {/* Logo */}
             <Link
-              to="/"
+              to={{
+                pathname: "/",
+                search: search,
+              }}
               className="block"
               aria-label="Cruip"
               onClick={() => {
@@ -86,6 +94,7 @@ function Header(props) {
                       to={{
                         pathname: "/",
                         hash: "#saveTheDate",
+                        search: search,
                       }}
                       onClick={() => {
                         handleScroll(props.dateRef.current);
@@ -100,6 +109,7 @@ function Header(props) {
                       to={{
                         pathname: "/",
                         hash: "#bestPlace",
+                        search: search,
                       }}
                       onClick={() => {
                         handleScroll(props.locationRef.current);
@@ -114,6 +124,7 @@ function Header(props) {
                       to={{
                         pathname: "/",
                         hash: "#youAreMyGift",
+                        search: search,
                       }}
                       onClick={() => {
                         handleScroll(props.giftRef.current);
@@ -128,6 +139,7 @@ function Header(props) {
                       to={{
                         pathname: "/",
                         hash: "#confirmacion",
+                        search: search,
                       }}
                       onClick={() => {
                         handleScroll(props.rsvpRef.current);
@@ -147,6 +159,7 @@ function Header(props) {
                   to={{
                     pathname: "/",
                     hash: "#saveTheDate",
+                    search: search,
                   }}
                   onClick={() => {
                     handleScroll(props.dateRef.current);
@@ -160,6 +173,7 @@ function Header(props) {
                   to={{
                     pathname: "/",
                     hash: "#bestPlace",
+                    search: search,
                   }}
                   onClick={() => {
                     handleScroll(props.locationRef.current);
@@ -173,6 +187,7 @@ function Header(props) {
                   to={{
                     pathname: "/",
                     hash: "#youAreMyGift",
+                    search: search,
                   }}
                   onClick={() => {
                     handleScroll(props.giftRef.current);
@@ -186,6 +201,7 @@ function Header(props) {
                   to={{
                     pathname: "/",
                     hash: "#confirmacion",
+                    search: search,
                   }}
                   onClick={() => {
                     handleScroll(props.rsvpRef.current);
