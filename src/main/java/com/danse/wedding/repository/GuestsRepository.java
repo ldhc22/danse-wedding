@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GuestsRepository extends CrudRepository<GuestEntity, String>{
-    List<GuestEntity> findAll();
 }

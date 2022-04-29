@@ -16,6 +16,7 @@ public class GuestEntity implements Persistable<String>{
     private String guestName;
     private String menu;
     private String allergies;
+    private String userId;
     @Transient
     private boolean newFlag = false;
     @Override

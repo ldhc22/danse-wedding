@@ -1,8 +1,13 @@
 package com.danse.wedding.service;
 
-import com.danse.wedding.model.UserTokenDto;
+import java.util.List;
+
+import com.danse.model.UserToken;
+import com.danse.wedding.exception.DanseException;
 
 public interface UserTokenService {
-    UserTokenDto getUserToken(String userId);
+    UserToken getUserToken(String userId);
+    List<UserToken> listUserToken();
+    void deleteUserToken(String userId) throws DanseException;
     String addUserToken(String userId);
 }

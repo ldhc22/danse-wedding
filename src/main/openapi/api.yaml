@@ -30,7 +30,30 @@ paths:
           description: "Successful response"
         "500":
           description: "Server error"
-
+          schema:
+            $ref: "#/definitions/Response"
+  /guests:
+    get:
+      tags:
+        - "guests"
+      summary: "List all registered guests"
+      description: "List all registered guests"
+      operationId: "listGuests"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Guest"
+          description: "Successful response"
+        "400":
+          description: "Error in the request"
+          schema:
+            $ref: "#/definitions/Response"
   /rsvp:
     post:
       tags:
@@ -51,23 +74,127 @@ paths:
             $ref: "#/definitions/Rsvp"
       responses:
         "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/Response"
+        "400":
+          description: "Error in the request"
+          schema:
+            $ref: "#/definitions/Response"
+  /userToken:
+    get:
+      tags:
+        - "userToken"
+      summary: "List user tokens"
+      description: "List the complete list of users with token"
+      operationId: "listUserToken"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserToken"
+          description: "Successful response"
+        "500":
+          description: "Server error"
+          schema:
+            $ref: "#/definitions/Response"
+  /userToken/{userId}:
+    post:
+      tags:
+        - "userToken"
+      summary: "Create new token for guests"
+      description: "Creates a new access token for the given userId and persists it to DB"
+      operationId: "createUserToken"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "User ID to generate the token"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          schema:
+            type: "string"
+            example: "f55accc0-2e35-40db-af52-b42fa12672e6"
           description: "Successful operation"
         "400":
           description: "Error in the request"
+          schema:
+            $ref: "#/definitions/Response"
+    get:
+      tags:
+        - "userToken"
+      summary: "Get the userToken"
+      description: "Retrieves the user Token information for the given user Id"
+      operationId: "getUserToken"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "User ID to generate the token"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/UserToken"
+          description: "Successful operation"
+        "400":
+          description: "Error in the request"
+          schema:
+            $ref: "#/definitions/Response"
+    delete:
+      tags:
+        - "userToken"
+      summary: "Delete the userToken"
+      description: "Deletes the user token if there is no guest registered under the same"
+      operationId: "deleteUserToken"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "User ID to generate the token"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Response"
+        "400":
+          description: "Error in the request"
+          schema:
+            $ref: "#/definitions/Response"
 definitions:
   Rsvp:
     type: "object"
     properties:
-      id:
+      userToken:
         type: "string"
-        example: "112358"
-      invitees:
+        example: "f55accc0-2e35-40db-af52-b42fa12672e6"
+      guests:
         type: "array"
         items:
-          $ref: "#/definitions/Invitee"
-  Invitee:
+          $ref: "#/definitions/Guest"
+  Guest:
     type: "object"
     properties:
+      id:
+        type: "string"
+        maxLength: 36
       name:
         type: "string"
         maxLength: 50
@@ -81,3 +208,31 @@ definitions:
         type: "string"
         maxLength: 150
         example: "Ninguna"
+      userId:
+        type: "string"
+        maxLength: 50
+        example: "JuanLopez"
+  UserToken:
+    type: "object"
+    properties:
+      userId:
+        type: "string"
+        maxLength: 50
+        example: "JuanLopez"
+      token:
+        type: "string"
+        maxLength: 36
+        example: "f55accc0-2e35-40db-af52-b42fa12672e6"
+      guests:
+        type: "array"
+        items:
+          $ref: "#/definitions/Guest"
+  Response:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+        example: "OK"
+      message:
+        type: "string"
+        example: "Success"
