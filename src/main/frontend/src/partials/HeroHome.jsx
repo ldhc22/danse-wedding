@@ -6,7 +6,7 @@ import HeroImage from "../images/hero-image.png";
 function HeroHome(props) {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   return (
-    <section className="relative" ref={props.topRef}>
+    <section className="relative " ref={props.topRef}>
       {/* Illustration behind hero content */}
       <div
         className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"
@@ -40,12 +40,15 @@ function HeroHome(props) {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 ">
         {/* Hero content */}
-        <div className="pt-28 pb-14 md:pt-24 md:pb-10  h-screen ">
+        <div
+          className="pt-28 pb-14 md:pt-24 md:pb-10  h-screen"
+          data-aos="zoom-y-out"
+        >
           {/* Section header */}
-          <div className="bg-slate-200 rounded-lg h-full ">
+          <div className="bg-slate-200 rounded-lg h-full transition duration-400 ease-in-out">
             <div className="flex flex-col text-center py-10 md:py-14 px-2 md:px-4 bg-ring-two-background md:bg-hex-background bg-full bg-no-repeat h-full w-full">
-            <div className="flex flex-col justify-center basis-1/4"></div>
-            <div className="flex flex-col justify-center max-w-md basis-1/4 pt-10 md:pt-0 mx-auto">
+              <div className="flex flex-col justify-center basis-1/4"></div>
+              <div className="flex flex-col justify-center max-w-md basis-1/4 pt-10 md:pt-0 mx-auto">
                 <p
                   className="text-md md:text-lg text-danse-green-500"
                   data-aos="zoom-y-out"
@@ -57,7 +60,7 @@ function HeroHome(props) {
               </div>
               <div className="flex flex-col justify-center basis-1/4">
                 <h1
-                 className="text-5xl md:text-4xl font-extrabold leading-tighter tracking-tighter font-astral"
+                  className="text-5xl md:text-4xl font-extrabold leading-tighter tracking-tighter font-astral"
                   data-aos="zoom-y-out"
                 >
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-danse-pink-100 to-danse-pink-500">
@@ -71,19 +74,17 @@ function HeroHome(props) {
                   data-aos="zoom-y-out"
                   data-aos-delay="150"
                 >
-                  Nos complace invitarlos a celebrar <br/>
+                  Nos complace invitarlos a celebrar <br />
                   nuestro matrimonio
-                  
-                </p> 
+                </p>
               </div>
               <div className=" basis-1/4">
-                  <span
+                <span
                   className="inline-block align-middle text-md md:text-lg text-danse-green-500"
                   data-aos="zoom-y-out"
                   data-aos-delay="150"
                 >
-                 El día 11 de Junio de 2022 <br/>
-                 a las 7:30 pm
+                  El día 11 de Junio de 2022 <br />a las 7:30 pm
                 </span>
               </div>
               <div className="flex flex-col justify-center basis-1/4"></div>

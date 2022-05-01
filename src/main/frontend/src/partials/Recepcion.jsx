@@ -35,8 +35,11 @@ function Recepcion(props) {
           {/* Items */}
           <div className="max-w-sm mx-auto grid gap-10 md:grid-cols-2 lg:grid-cols-2 items-start md:max-w-4xl pb-12 md:pb-20">
             {/* 1st item direction */}
-            <div className="h-64 md:h-full relative flex flex-col items-center justify-center px-6 py-16 bg-danse-baige-100 rounded shadow-xl">
-              <div className="h-16 w-16 flex text-center bg-danse-pink-100 rounded-full shadow flex-shrink-0 ml-3">
+            <div
+              className="h-64 md:h-full relative flex flex-col items-center justify-center px-6 py-16 bg-danse-baige-100 rounded shadow-xl "
+              data-aos="fade-right"
+            >
+              <div className="h-16 w-16 flex text-center bg-danse-pink-100 rounded-full shadow flex-shrink-0 ml-3 transition duration-300 ease-in-out">
                 <img className="w-1/2 h-1/2 m-auto" src={MapPin} alt="Pin" />
               </div>
               <h4 className="text-xl text-danse-green-500 font-bold leading-snug tracking-tight mb-1">
@@ -49,7 +52,10 @@ function Recepcion(props) {
             </div>
 
             {/* 2nd item map */}
-            <div className="h-64 md:h-full relative flex flex-col items-center bg-danse-baige-100 rounded shadow-xl ">
+            <div
+              className="h-64 md:h-full relative flex flex-col items-center bg-danse-baige-100 rounded shadow-xl "
+              data-aos="fade-left"
+            >
               <Map location={location} zoomLevel={15} />
             </div>
           </div>
