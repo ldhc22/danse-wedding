@@ -44,21 +44,30 @@ public class RsvpServiceImpl implements RsvpService{
 
     @Override
     public void processRsvp(Rsvp rsvp) throws DanseException {
+        validateRsvp(rsvp);
         Optional<UserTokenEntity> userToken = tokenRepo.findByToken(rsvp.getUserToken());
-        if(userToken.isPresent() && rsvp.getGuests() != null && !rsvp.getGuests().isEmpty()) {
+        if(userToken.isPresent()) {
             UserTokenEntity tokenEntity = userToken.get();
-            List<GuestEntity> guests = rsvp.getGuests().stream().map(guest -> {
-                GuestEntity entity = GuestsMapper.map(guest);
-                entity.setNewFlag(true);
-                entity.setGuestId(UUID.randomUUID().toString());
-                entity.setUserId(tokenEntity.getId());
-                return entity;
-            }).collect(Collectors.toList());
-            guestsRepo.saveAll(guests);
-            //tokenRepo.save(tokenEntity);
-            sendEmailMessage(UserTokenMapper.map(tokenEntity), rsvp.getGuests());
+            if(tokenEntity.getGuests() == null || tokenEntity.getGuests().isEmpty()){
+                List<GuestEntity> guests = rsvp.getGuests().stream().map(guest -> {
+                    GuestEntity entity = GuestsMapper.map(guest);
+                    entity.setNewFlag(true);
+                    entity.setGuestId(UUID.randomUUID().toString());
+                    entity.setUserId(tokenEntity.getId());
+                    return entity;
+                }).collect(Collectors.toList());
+                guestsRepo.saveAll(guests);
+                //tokenRepo.save(tokenEntity);
+                sendEmailMessage(UserTokenMapper.map(tokenEntity), rsvp.getGuests());
+            } else {
+                throw new DanseException(
+                    DanseConstants.REQUEST_ERROR + " Token was already used to register guests", 
+                    DanseConstants.CODE_BAD_REQUEST);
+            }  
         } else {
-            throw new DanseException(DanseConstants.REQUEST_ERROR, DanseConstants.CODE_BAD_REQUEST);
+            throw new DanseException(
+                DanseConstants.REQUEST_ERROR + " Invalid userToken provided", 
+                DanseConstants.CODE_BAD_REQUEST);
         }
     }
 
@@ -75,6 +84,36 @@ public class RsvpServiceImpl implements RsvpService{
         });
         message.setText(sb.toString());
         mailSender.send(message);
+    }
+
+    private void validateRsvp(Rsvp rsvp) throws DanseException{
+        if(rsvp.getUserToken() == null || rsvp.getUserToken().isEmpty() ){
+            throw new DanseException(
+                DanseConstants.REQUEST_ERROR + " UserToken is required", 
+                DanseConstants.CODE_BAD_REQUEST);
+        }
+        if(rsvp.getUserToken().length() != 36){
+            throw new DanseException(
+                DanseConstants.REQUEST_ERROR + " Wrong userToken provided", 
+                DanseConstants.CODE_BAD_REQUEST);
+        }
+        if(rsvp.getGuests() == null || rsvp.getGuests().isEmpty()){
+            throw new DanseException(
+                DanseConstants.REQUEST_ERROR + " Guests were not provided", 
+                DanseConstants.CODE_BAD_REQUEST);
+        }
+        for(Guest guest : rsvp.getGuests()){
+            if(guest.getName() == null || guest.getName().isEmpty()){
+                throw new DanseException(
+                    DanseConstants.REQUEST_ERROR + " Guests name should not be empty", 
+                    DanseConstants.CODE_BAD_REQUEST);
+            }
+            if(guest.getMenu() == null){
+                throw new DanseException(
+                    DanseConstants.REQUEST_ERROR + " Guests menu should not be empty", 
+                    DanseConstants.CODE_BAD_REQUEST);
+            }
+        }
     }
     
 }

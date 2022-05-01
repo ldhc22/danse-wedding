@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +26,6 @@ public class HelloWorldController implements HelloWorldApi{
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-
-    @Value("${mail.smtp.host}")
-    private String smtp;
 
     @Autowired
     public HelloWorldController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -48,7 +44,7 @@ public class HelloWorldController implements HelloWorldApi{
 
     @GetMapping(value = "/helloWorld")
     public ResponseEntity<String> helloWorld() {
-        return new ResponseEntity<String>("Hello World: " +smtp, HttpStatus.OK);
+        return new ResponseEntity<String>("Hello World", HttpStatus.OK);
     }
     
 }
