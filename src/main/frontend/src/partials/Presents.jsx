@@ -17,8 +17,8 @@ function Presents(props) {
   };
 
   const redirect = (url) => {
-    window.open(url,"_blank");
-  }
+    window.open(url, "_blank");
+  };
 
   useEffect(() => {
     heightFix();
@@ -39,7 +39,8 @@ function Presents(props) {
           <div className="max-w-3xl mx-auto text-center pb-10 md:pb-12 text-danse-green-500">
             <h1 className="h2 mb-4">Mesa de regalos</h1>
             <p className="text-xl text-danse-green-500">
-              "El mejor regalo es un abrazo. Es talla única y a nadie le importa que se lo devuelvas"
+              "El mejor regalo es un abrazo. Es talla única y a nadie le importa
+              que se lo devuelvas"
             </p>
           </div>
 
@@ -65,25 +66,51 @@ function Presents(props) {
                         Lo único que queremos para nuestra boda es tu presencia
                       </div>
                       <div className="text-danse-green-500">
-                        <p>Pero, si deseas regalarnos algo, tenemos una mesa de regalos en Liverpool.</p>
+                        <p>
+                          Pero, si deseas regalarnos algo, tenemos una mesa de
+                          regalos en Liverpool.
+                        </p>
+                        <p>
+                          El número de evento es:{" "}
+                          <a
+                            className="hover:text-danse-pink-500"
+                            href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            50859394
+                          </a>
+                        </p>
                       </div>
                     </div>
                     <div className="flex justify-center items-center w-10 h-10 bg-danse-pink-100 rounded-full shadow flex-shrink-0 ml-3">
-                      <img onClick= {()=>redirect("https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493")} className="w-1/2 h-1/2 m-auto" src={GiftPin} alt="Pin" />
+                      <img
+                        onClick={() =>
+                          redirect(
+                            "https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493"
+                          )
+                        }
+                        className="w-1/2 h-1/2 m-auto"
+                        src={GiftPin}
+                        alt="Pin"
+                      />
                     </div>
                   </div>
                   {/*Click*/}
                   <div className="pt-6">
-                    <a className="flex justify-center items-center text-danse-pink-500 text-2xl hover:underline" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493" target="_blank" rel="noopener noreferrer">Da click aquí</a>
+                    <a
+                      className="flex justify-center items-center text-danse-pink-500 text-2xl hover:underline"
+                      href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Da click aquí
+                    </a>
                   </div>
-
                 </div>
-                </div>
-                <div>
               </div>
-              
+              <div></div>
             </div>
-            
 
             {/* Tabs items */}
             <div
@@ -106,7 +133,11 @@ function Presents(props) {
                 >
                   <div className="relative inline-flex flex-col">
                     <img
-                      onClick= {()=>redirect("https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493")}
+                      onClick={() =>
+                        redirect(
+                          "https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493"
+                        )
+                      }
                       className="md:max-w-none mx-auto rounded"
                       src={DanseGift}
                       width="346"

@@ -62,6 +62,8 @@ public class RsvpController implements RsvpApi{
             resp.setMessage(e.getMessage());
             if(e.getCode() != null && e.getCode().equals(DanseConstants.CODE_BAD_REQUEST)){
                 return new ResponseEntity<Response>(resp, HttpStatus.BAD_REQUEST);
+            } else if(e.getCode() != null && e.getCode().equals(DanseConstants.CODE_CONFLICT)) {
+                return new ResponseEntity<Response>(resp, HttpStatus.CONFLICT);
             } else {
                 return new ResponseEntity<Response>(resp, HttpStatus.INTERNAL_SERVER_ERROR);
             }

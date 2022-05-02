@@ -62,7 +62,7 @@ public class RsvpServiceImpl implements RsvpService{
             } else {
                 throw new DanseException(
                     DanseConstants.REQUEST_ERROR + " Token was already used to register guests", 
-                    DanseConstants.CODE_BAD_REQUEST);
+                    DanseConstants.CODE_CONFLICT);
             }  
         } else {
             throw new DanseException(
