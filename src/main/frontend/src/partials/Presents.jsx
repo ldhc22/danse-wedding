@@ -68,18 +68,16 @@ function Presents(props) {
                       <div className="text-danse-green-500">
                         <p>
                           Pero, si deseas regalarnos algo, tenemos una mesa de
-                          regalos en Liverpool.
-                        </p>
-                        <p>
-                          El número de evento es:{" "}
+                          regalos en Liverpool con número de evento:{" "}
                           <a
-                            className="hover:text-danse-pink-500"
+                            className="text-danse-pink-400 hover:text-danse-pink-500"
                             href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/50859493"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             50859394
                           </a>
+                          .
                         </p>
                       </div>
                     </div>

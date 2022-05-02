@@ -84,6 +84,7 @@ function Rsvp(props) {
             };
           } else {
             clearFields();
+            handleScroll(props.rsvpRef.current);
             modal = { show: true, error: false, errorMessage: "" };
           }
           setShowModal(modal);
@@ -102,6 +103,14 @@ function Rsvp(props) {
     } else {
       console.log("Error in guest form");
     }
+  };
+
+  const handleScroll = (ref) => {
+    window.scrollTo({
+      top: ref.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   {
@@ -281,7 +290,7 @@ function Rsvp(props) {
             </svg>
           </div>
           <h1 className="h1 pt-10 md:pt-16 px-4 pb-4 md:pb-6">
-            {showModal.error ? "Error" : "Éxito"}
+            {showModal.error ? "¡Ups!" : "Éxito"}
           </h1>
           <p className="text-xl pb-10 md:pb-16 px-4">
             {showModal.error

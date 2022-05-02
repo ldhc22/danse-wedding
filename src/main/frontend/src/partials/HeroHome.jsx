@@ -84,7 +84,7 @@ function HeroHome(props) {
                   data-aos="zoom-y-out"
                   data-aos-delay="150"
                 >
-                  El día 11 de Junio de 2022 <br />a las 7:30 pm
+                  El día 11 de Junio de 2022 <br />a las 7:00 pm
                 </span>
               </div>
               <div className="flex flex-col justify-center basis-1/4"></div>

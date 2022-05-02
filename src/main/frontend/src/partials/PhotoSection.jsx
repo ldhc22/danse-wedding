@@ -18,7 +18,7 @@ function PhotoSection() {
             data-aos="fade-in"
           >
             <h1 className="text-center text-xl md:text-2xl text-danse-green-500 transition duration-300 ease-in-out">
-              No será perfecto. Pero, ¿tiene que serlo?
+              "No será perfecto. Pero, ¿tiene que serlo?"
             </h1>
           </div>
         </div>

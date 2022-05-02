@@ -45,9 +45,19 @@ function Recepcion(props) {
               <h4 className="text-xl text-danse-green-500 font-bold leading-snug tracking-tight mb-1">
                 Radisson del Rey Toluca
               </h4>
-              <p className="text-danse-green-500 text-center">
+              <p className="text-danse-green-500 text-center mb-4 md:mb-6">
                 Carr Toluca - México km 63.5, Delegación Sta Ana Tlapaltitlán,
                 50160 Toluca de Lerdo, Méx.
+              </p>
+              <p>
+                <a
+                  className="text-danse-pink-400 hover:text-danse-pink-500 "
+                  href="https://goo.gl/maps/cLQfbXHnJxvjCJos8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Abrir en Google Maps
+                </a>
               </p>
             </div>
 
