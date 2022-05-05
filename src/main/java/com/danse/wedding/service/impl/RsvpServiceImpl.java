@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import com.danse.model.Guest;
 import com.danse.model.Rsvp;
 import com.danse.model.UserToken;
@@ -18,14 +21,19 @@ import com.danse.wedding.repository.UserTokenRepository;
 import com.danse.wedding.service.RsvpService;
 import com.danse.wedding.util.DanseConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RsvpServiceImpl implements RsvpService{
+
+    private static final Logger log = LoggerFactory.getLogger(RsvpServiceImpl.class);
 
     @Autowired
     private JavaMailSender mailSender;
@@ -40,7 +48,7 @@ public class RsvpServiceImpl implements RsvpService{
     private String username;
 
     @Value("${mail.to}")
-    private String toEmail;
+    private String[] toEmail;
 
     @Override
     public void processRsvp(Rsvp rsvp) throws DanseException {
@@ -72,18 +80,41 @@ public class RsvpServiceImpl implements RsvpService{
     }
 
     private void sendEmailMessage(UserToken userToken, List<Guest> guests){
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(username);
-        message.setTo(toEmail);
-        message.setSubject(DanseConstants.MAIL_SUBJECT + userToken.getUserId());
-        StringBuilder sb = new StringBuilder(String.format(DanseConstants.MAIL_TEXT, userToken.getUserId()));
-        guests.stream().forEach(guest -> {
-            sb.append(String.format(
-                DanseConstants.MAIL_TEXT_GUEST, guest.getName(), guest.getMenu().toString(), guest.getAllergies()
-                ));
-        });
-        message.setText(sb.toString());
-        mailSender.send(message);
+        MimeMessage message = mailSender.createMimeMessage();
+        try{
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(username);
+            helper.setTo(toEmail);
+            helper.setSubject(DanseConstants.MAIL_SUBJECT + userToken.getUserId());
+            StringBuilder sb = new StringBuilder(String.format(DanseConstants.MAIL_TEXT, userToken.getUserId()));
+            
+            for(int i = 0; i < guests.size(); i++){
+                String row = "";
+                if(i%2 == 0){
+                    row = String.format(
+                        DanseConstants.MAIL_TEXT_GUEST_EVEN, 
+                        guests.get(i).getName(), 
+                        guests.get(i).getMenu().toString(), 
+                        guests.get(i).getAllergies()
+                        );
+                } else {
+                    row = String.format(
+                        DanseConstants.MAIL_TEXT_GUEST_ODD, 
+                        guests.get(i).getName(), 
+                        guests.get(i).getMenu().toString(), 
+                        guests.get(i).getAllergies()
+                        );
+                }                
+                sb.append(row);
+            }
+            sb.append(DanseConstants.MAIL_END);
+            helper.setText(sb.toString(), true);
+            mailSender.send(message);
+        } catch(MessagingException me){
+            log.error("Exception occured during email sending", me);
+        }
+        
+        
     }
 
     private void validateRsvp(Rsvp rsvp) throws DanseException{
